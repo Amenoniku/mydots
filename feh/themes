@@ -1,0 +1,8 @@
+feh \
+--image-bg black \
+--draw-filename \
+--draw-exif \
+--cache-thumbnails \
+--edit \
+--fullscreen \
+--scale-down \

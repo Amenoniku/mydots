@@ -1,177 +1,60 @@
 @import url("./colors.css");
 @import url("./styles/weather.css");
 
-* {
-  border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: Material Design Icons, 'M+CodeLat Nerd Font';
+*{
+  font-family: JetBrainsMono;
   font-size: 13px;
+  min-height: 0;
+  color: white;
 }
 
 window#waybar {
-  background-color: rgba(24, 24, 37, 0.8);
-  transition-property: background-color;
-  transition-duration: 0.5s;
+  background-color: rgba(1, 22, 40, .6);
+  border-radius: 0;
 }
 
-window#waybar.hidden {
-  opacity: 0.5;
+#workspaces{
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-right: 10px;
+  margin-left: 25px;
 }
 
-#workspaces {
-  background-color: transparent;
+#workspaces button{
+  border-radius: 15px;
+  margin-right: 10px;
+  padding: 1px 10px;
+  font-weight: bolder;
+  background-color: #181818;
 }
 
-#workspaces button {
-  all: initial; /* Remove GTK theme values (waybar #1351) */
-  min-width: 0; /* Fix weird spacing in materia (waybar #450) */
-  box-shadow: inset 0 -3px transparent; /* Use box-shadow instead of border so the text isn't offset */
-  padding: 3px 18px;
-  margin: 3px 3px;
-  border-radius: 4px;
-  background-color: #1e1e2e;
-  color: #cdd6f4;
-}
-
-#taskbar button.active,
-#workspaces button.active {
-  color: #1e1e2e;
-  font-weight: bold;
+#workspaces button.active, #workspaces button.focused{
+  padding: 0 22px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   background-color: @purple;
 }
 
-#workspaces button:hover {
- box-shadow: inherit;
- text-shadow: inherit;
- color: #1e1e2e;
- background-color: @comment;
-}
-
-#workspaces button.urgent {
-  background-color: @yellow;
-}
-
-/* #taskbar, */
-#cpu,
-#temperature,
-#bluetooth,
-#memory,
-#custom-power,
-#battery,
-#backlight,
-#pulseaudio,
-#network,
-#clock,
-#language,
+#tray,
+#mpd,
 #custom-weather,
-#tray {
-  border-radius: 4px;
-  margin: 3px 3px;
-  padding: 3px 10px;
-  background-color: #1e1e2e;
-  color: #181825;
-}
-
-#taskbar button {
-  border-radius: 4px;
-  /* padding: 0px; */
-}
-
-#custom-power {
-  margin-right: 6px;
-}
-
-#custom-logo {
-  padding-right: 7px;
-  padding-left: 7px;
-  margin-left: 5px;
-  font-size: 15px;
-  border-radius: 8px 0px 0px 8px;
-  color: #1793d1;
-}
-
-
-#language {
-  background-color: #2b2b2b;
+#temperature, 
+#memory,
+#sway-mode,
+#backlight, 
+#pulseaudio, 
+#custom-vpn,
+#disk,
+#custom-recorder,
+#custom-audiorec,
+#battery, 
+#clock, 
+#network,
+#custom-power,
+#hyprland-language {
+  padding: 0 10px;
 }
 
 #cpu {
-  background-color: #f0f8ff;
-}
-
-#temperature.cpu {
-  background-color: Beige;
-}
-
-#temperature.gpu {
-  background-color: #bf4040;
-  color: white;
-}
-
-#memory {
-  background-color: #42f20d;
-}
-
-#battery {
-  background-color: @yellow;
-}
-@keyframes blink {
-  to {
-    background-color: @yellow;
-    color: #181825;
-  }
-}
-
-#battery.warning,
-#battery.critical,
-#battery.urgent {
-  background-color: #ff0048;
-  color: #181825;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-#battery.charging {
-  background-color: #a6e3a1;
-}
-
-#backlight {
-  background-color: #fab387;
-}
-
-#pulseaudio {
-  background-color: #43ead4;
-}
-
-#bluetooth,
-#network {
-  background-color: #1089b1;
-  padding-right: 17px;
-  color: white
-}
-
-#custom-weather,
-#clock {
-  font-family: MartianMono Nerd Font;
-  background-color: rgba(191, 149, 249, 0.24);
-  color: white;
-}
-
-#custom-power {
-  background-color: #f2cdcd;
-}
-
-
-tooltip {
-  border-radius: 8px;
-  padding: 15px;
-  background-color: #131822;
-}
-
-tooltip label {
-  padding: 5px;
-  background-color: #131822;
+  padding-left: 10px;
+  padding-right: 3px;
 }

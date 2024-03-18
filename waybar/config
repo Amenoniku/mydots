@@ -16,13 +16,13 @@
     "modules-right": [
         "tray",
         "hyprland/language",
+        "pulseaudio",
         "cpu",
         "temperature#cpu",
         "temperature#gpu",
         "memory",
         "bluetooth",
-        "network",
-        "pulseaudio",
+        // "network",
         "battery",
         "custom/power"
     ],
@@ -77,7 +77,8 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "kitty -e 'htop'"
     },
     "temperature#cpu": {
         "thermal-zone": 2,
@@ -96,7 +97,7 @@
         "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 80,
         "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
+        "format": "GPU: {temperatureC}°C {icon}",
         "format-icons": [
             "",
             "",
@@ -105,7 +106,7 @@
     },
     "memory": {
         "interval": 5,
-        "format": "{}% 󰍛 ",
+        "format": "{used:0.2f}GB 󰍛",
         "max-length": 10
     },
     "tray": {
@@ -156,27 +157,23 @@
         "nospacing": 1
     },
     "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": "󰝟 {format_source}",
-        "format-source": "  ",
-        "format-source-muted": "  ",
-        "format-icons": {
-            "headphone": " ",
-            "hands-free": "",
-            "headset": "",
-            "phone": " ",
-            "portable": " ",
-            "car": " ",
-            "default": [
-                "",
-                "",
-                ""
-            ]
-        },
-        "on-click": "~/.config/rofi/pipeware/pw-change-sink.sh &",
-        "scroll-step": 1
+      // "scroll-step": 1, // %, can be a float
+      "format": "{icon}   {volume}% {format_source}",
+      "format-bluetooth": "{icon} {volume}% {format_source}",
+      "format-bluetooth-muted": " {format_source}",
+      "format-muted": "  {format_source}",
+      "format-source": "",
+      "format-source-muted": "",
+      "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "🎧",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", ""]
+      },
+      "on-click": "~/.config/rofi/pipeware/pw-change-sink.sh &"
     },
     "custom/logo": {
         "format": "  ",

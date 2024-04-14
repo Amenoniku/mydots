@@ -157,23 +157,27 @@
         "nospacing": 1
     },
     "pulseaudio": {
-      // "scroll-step": 1, // %, can be a float
-      "format": "{icon}   {volume}% {format_source}",
-      "format-bluetooth": "{icon} {volume}% {format_source}",
-      "format-bluetooth-muted": " {format_source}",
-      "format-muted": "  {format_source}",
-      "format-source": "",
-      "format-source-muted": "",
-      "format-icons": {
-        "headphone": "",
-        "hands-free": "",
-        "headset": "🎧",
-        "phone": "",
-        "portable": "",
-        "car": "",
-        "default": ["", "", ""]
-      },
-      "on-click": "~/.config/rofi/pipeware/pw-change-sink.sh &"
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon}   {volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " {format_source}",
+        "format-muted": "  {format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "🎧",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "~/.config/rofi/pipeware/pw-change-sink.sh &"
     },
     "custom/logo": {
         "format": "  ",
@@ -222,7 +226,7 @@
         "on-click": "~/.config/rofi/powermenu/type-2/powermenu.sh &"
     },
     "custom/weather": {
-        "exec": "python ~/.config/waybar/scripts/weather.py",
+        "exec": "node ~/.config/waybar/scripts/weather.js",
         "restart-interval": 300,
         "return-type": "json",
         "on-click": "xdg-open https://weather.com/ru-RU/weather/today/l/ef8801feddd0b4136ac70c3b133451e22754037d3dbef11a91234d3442a9b7e6"

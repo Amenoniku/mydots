@@ -87,7 +87,7 @@ skin=modarin256root-defbg
 
 [Layout]
 output_lines=0
-left_panel_size=103
+left_panel_size=50
 top_panel_size=0
 message_visible=true
 keybar_visible=true
@@ -139,7 +139,7 @@ quick_search_mode=2
 select_flags=6
 
 [Panelize]
-Изменённые файлы под контролем git=git ls-files --modified
-Найти оригиналы (*.orig) после команды patch=find . -name \\*.orig -print
 Найти корректуры, отвергнутые командой patch=find . -name \\*.rej -print
+Изменённые файлы под контролем git=git ls-files --modified
 Найти программы с установленными битами SUID/SGID=find . \\( \\( -perm -04000 -a -perm /011 \\) -o \\( -perm -02000 -a -perm /01 \\) \\) -print
+Найти оригиналы (*.orig) после команды patch=find . -name \\*.orig -print

@@ -21,6 +21,7 @@ x-scheme-handler/webcal=userapp-Thunderbird-J82UJ2.desktop;
 x-scheme-handler/webcals=userapp-Thunderbird-J82UJ2.desktop;
 image/jpeg=feh.desktop;
 application/vnd.microsoft.portable-executable=net.lutris.Lutris.desktop;
+application/pdf=libreoffice-draw.desktop;
 
 [Default Applications]
 x-scheme-handler/http=firefox.desktop

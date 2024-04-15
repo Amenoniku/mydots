@@ -17,10 +17,10 @@
         "tray",
         "hyprland/language",
         "pulseaudio",
+        "memory",
         "cpu",
         "temperature#cpu",
         "temperature#gpu",
-        "memory",
         "bluetooth",
         // "network",
         "battery",
@@ -28,8 +28,8 @@
     ],
     "hyprland/language": {
         "format": "{}",
-        "format-en": "🇺🇸",
-        "format-ru": "🇷🇺"
+        "format-en": " 🇺🇸 ",
+        "format-ru": " 🇷🇺 "
     },
     "wlr/taskbar": {
         "format": "{app_id}",
@@ -76,7 +76,7 @@
         "persistent_workspaces": {}
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}%  ",
         "tooltip": false,
         "on-click": "kitty -e 'htop'"
     },
@@ -84,8 +84,8 @@
         "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
-        "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
+        "format-critical": "CPU: {temperatureC}°C {icon}",
+        "format": "CPU: {temperatureC}°C {icon}",
         "format-icons": [
             "",
             "",
@@ -96,7 +96,7 @@
         "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 80,
-        "format-critical": "{temperatureC}°C {icon}",
+        "format-critical": "GPU: {temperatureC}°C {icon}",
         "format": "GPU: {temperatureC}°C {icon}",
         "format-icons": [
             "",
@@ -158,11 +158,11 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon}   {volume}% {format_source}",
+        "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": "{icon} {volume}% {format_source}",
         "format-bluetooth-muted": " {format_source}",
         "format-muted": "  {format_source}",
-        "format-source": "",
+        "format-source": " ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -221,7 +221,7 @@
         "tooltip": false
     },
     "custom/power": {
-        "format": "󰤆",
+        "format": "󰤆 ",
         "tooltip": false,
         "on-click": "~/.config/rofi/powermenu/type-2/powermenu.sh &"
     },
@@ -235,7 +235,7 @@
     "bluetooth": {
         "format": "{icon}",
         "format-icons": {
-            "enabled": " ",
+            "enabled": " ",
             "disabled": "off "
         },
         "on-click": "~/.config/rofi/bluetooth/blt-connect.sh &"

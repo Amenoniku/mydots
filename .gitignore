@@ -40,3 +40,6 @@ zoom.conf
 zoomus.conf
 xfce4
 node_modules/
+dconf
+# nemo/bookmark-metadata
+# gtk-3.0/bookmarks

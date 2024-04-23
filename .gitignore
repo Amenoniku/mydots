@@ -43,3 +43,5 @@ node_modules/
 dconf
 # nemo/bookmark-metadata
 # gtk-3.0/bookmarks
+obsidian
+simple-update-notifier

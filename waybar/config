@@ -4,7 +4,7 @@
     "spacing": 0,
     "height": 25,
     "modules-left": [
-        "custom/logo",
+        // "custom/logo",
         "hyprland/workspaces"
         // "wlr/taskbar"
     ],

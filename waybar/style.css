@@ -18,8 +18,8 @@ window#waybar {
   /* margin-top: 3px; */
   /* margin-bottom: 3px; */
   margin-right: 10px;
-  margin-left: 25px;
-  padding: 0px 10px;
+  /* margin-left: 25px; */
+  /* padding: 0px 10px; */
 }
 
 #workspaces button{

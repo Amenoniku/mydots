@@ -12,17 +12,16 @@ currentSinkId=$(pactl list short sinks |
 )
 
 sinksDescriptions=$(pactl list sinks |
-  grep -E 'Sink #|Description:' |
-  sed 's/Sink #//; N; s/\n//; s/\s\+/ /g; s/Description: //' |
+  grep -E 'Sink #|alsa.card_name = |alsa.name =' |
+  sed 's/Sink #//; N; s/\n//; s/\s\+/ /g; s/alsa.card_name =//; N; s/\n//; s/\s\+/ /g; s/alsa.name =//; s/"//g' |
   awk -v currentSink="$currentSinkId" '{
     if ($1 == currentSink) {
-      print " " $0
+      print $0 " "
     } else {
       print $0
     }
   }'
 )
-
 
 chosenSinkId=$(echo "$sinksDescriptions" | rofi -dmenu -i -theme "${dir}"/${theme}.rasi -p '󰽰' | awk '{print $1}')
 

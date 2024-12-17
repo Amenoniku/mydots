@@ -22,6 +22,7 @@ x-scheme-handler/webcals=userapp-Thunderbird-J82UJ2.desktop;
 image/jpeg=feh.desktop;
 application/vnd.microsoft.portable-executable=net.lutris.Lutris.desktop;
 application/pdf=libreoffice-draw.desktop;
+x-scheme-handler/tonsite=org.telegram.desktop.desktop;
 
 [Default Applications]
 x-scheme-handler/http=firefox.desktop
@@ -104,3 +105,4 @@ text/x-csrc=code-oss.desktop
 text/html=code-oss.desktop
 text/x-moc=code-oss.desktop
 application/vnd.microsoft.portable-executable=net.lutris.Lutris.desktop
+x-scheme-handler/tonsite=org.telegram.desktop.desktop

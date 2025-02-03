@@ -80,11 +80,11 @@
     "cpu": {
         "format": "{usage}%  ",
         "tooltip": false,
-        "on-click": "kitty -e 'htop'"
+        "on-click": "kitty -e 'btop'"
     },
     "temperature#cpu": {
         "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp3_input",
         "critical-threshold": 80,
         "format-critical": "CPU: {temperatureC}°C {icon}",
         "format": "CPU: {temperatureC}°C {icon}",
@@ -96,7 +96,7 @@
     },
     "temperature#gpu": {
         "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
         "format-critical": "GPU: {temperatureC}°C {icon}",
         "format": "GPU: {temperatureC}°C {icon}",

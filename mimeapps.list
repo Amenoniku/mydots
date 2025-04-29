@@ -23,6 +23,7 @@ image/jpeg=feh.desktop;
 application/vnd.microsoft.portable-executable=net.lutris.Lutris.desktop;
 application/pdf=libreoffice-draw.desktop;
 x-scheme-handler/tonsite=org.telegram.desktop.desktop;
+text/plain=code.desktop;
 
 [Default Applications]
 x-scheme-handler/http=firefox.desktop
@@ -96,7 +97,7 @@ text/vnd.trolltech.linguist=firefox.desktop
 text/x-google-video-pointer=code-oss.desktop
 text/calendar=code-oss.desktop
 text/vcard=code-oss.desktop
-text/plain=code-oss.desktop
+text/plain=code.desktop
 text/x-tex=code-oss.desktop
 text/tcl=code-oss.desktop
 text/x-pascal=code-oss.desktop

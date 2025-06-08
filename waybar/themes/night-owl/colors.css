@@ -1,0 +1,21 @@
+/* Night Owl Color Palette */
+/* Основные цвета */
+@define-color base-bg       #011627; /* Основной фон */
+@define-color base-text     #d6deeb; /* Основной текст */
+@define-color panel-bg      #1d3b53; /* Фон панелей */
+
+/* Акцентные цвета */
+@define-color blue          #82aaff; /* Голубой (акцент) */
+@define-color pink          #ff5874; /* Розовый (CPU) */
+@define-color purple        #c792ea; /* Фиолетовый (RAM) */
+@define-color teal          #7fdbca; /* Бирюзовый (Аудио) */
+@define-color green         #addb67; /* Зеленый (Батарея, часы) */
+@define-color yellow        #ffeb95; /* Желтый (Предупреждения) */
+@define-color red           #ef5350; /* Красный (Критично) */
+
+/* Семантические имена */
+@define-color focus         @blue; /* Активный элемент */
+@define-color warning       @yellow; /* Предупреждение */
+@define-color critical      @red; /* Ошибка */
+@define-color active        @green; /* Включенный статус */
+@define-color inactive      #5f7e97; /* Неактивный элемент */

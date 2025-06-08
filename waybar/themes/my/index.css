@@ -1,0 +1,63 @@
+@import url("./colors.css");
+
+* {
+  font-family: HackNerdFont;
+  font-weight: bold;
+  font-size: 13px;
+  min-height: 0;
+  color: white;
+}
+
+window#waybar {
+  background-color: rgba(28, 36, 51, 0.8);
+  border-radius: 0;
+}
+
+#workspaces {
+  /* margin-top: 3px; */
+  /* margin-bottom: 3px; */
+  margin-right: 10px;
+  /* margin-left: 25px; */
+  /* padding: 0px 10px; */
+}
+
+#workspaces button {
+  /* border-radius: 15px; */
+  margin-right: 10px;
+  padding: 0px 12px;
+  font-weight: bolder;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  background-color: #5294e2;
+}
+
+#tray,
+#mpd,
+#custom-weather,
+#temperature,
+#memory,
+#sway-mode,
+#backlight,
+#pulseaudio,
+#custom-vpn,
+#disk,
+#custom-recorder,
+#custom-audiorec,
+#battery,
+#clock,
+#network,
+#custom-power,
+#hyprland-language {
+  padding: 0 10px;
+}
+
+#cpu {
+  padding-left: 10px;
+  padding-right: 3px;
+}

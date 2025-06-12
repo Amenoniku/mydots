@@ -4,10 +4,18 @@
 # Конфигурация скрипта для загрузки обоев
 # =============================================
 
-if [ -f ".env" ]; then
-  source .env
+# Функция для уведомлений
+send_dunst() {
+  local text=$1
+  local pic=$2
+  dunstify -i $pic -a "Обновлятор обоев" -t 3000 "$text"
+}
+
+readonly ENV_PATH="$HOME/.config/hypr/scripts/.env"
+if [ -f "$ENV_PATH" ]; then
+  source $ENV_PATH
 else
-  echo "Ошибка: файл .env не найден!"
+  send_dunst "Ошибка: файл .env не найден!"
   exit 1
 fi
 
@@ -31,13 +39,6 @@ readonly MONITORS=("DP-3" "HDMI-A-1")
 # =============================================
 # Функции скрипта
 # =============================================
-
-# Функция для уведомлений
-send_dunst() {
-  local text=$1
-  local pic=$2
-  dunstify -i $pic -a "Обновлятор обоев" -t 3000 "$text"
-}
 
 # Функция для создания директории, если она не существует
 ensure_directory_exists() {
@@ -187,4 +188,4 @@ main() {
   send_dunst "Все обои загружены!"
 }
 
-main "$@"
+# main "$@"

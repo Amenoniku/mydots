@@ -4,28 +4,47 @@
 # Конфигурация скрипта для загрузки обоев
 # =============================================
 
-# Параметры API Wallhaven
+if [ -f ".env" ]; then
+  source .env
+else
+  echo "Ошибка: файл .env не найден!"
+  exit 1
+fi
+
+# API Wallhaven
 readonly API_URL="https://wallhaven.cc/api/v1/search"
-readonly API_KEY="nEVL4198MXFWxnlfqV8UBrtpNG2rLyNb" # В продакшене лучше использовать переменные окружения
 
 # Параметры поиска обоев
-readonly QUERY="+artwork +illustration +cyberpunk -gore"
-readonly RESOLUTION="1920x1080"                              # Желаемое разрешение
-readonly WALLPAPER_DIR="$HOME/Pictures/wallpapers/wallhaven" # Папка для хранения обоев
+readonly QUERY="+art +artwork -gore -horror -3d -nipples -erotic -boobs -glutes -nude -hentai -bdsm -bottomless -womb-tattoo -cameltoe -vulva -pubic -furry -adult-games -lesbians -VintageFlash -spread-legs -panties-down -v -underboob -body-oil -Keith-P.-Rein -fishnet-bodysuit -Jonathan-Hamilton -Gantz -suicide -upskirt -tan-lines -catsuit -nip-slips -Dandonfuga -swimwear -the-gap -thong -areola-slip -Homura-Akemi -implied-sex -ass -sex -micro-bikini -bikini -see-through-dress -dva -overwatch -pov -anime-girls -anime-boys"
+readonly CATEGORIES='111'
+readonly AI_ART_FILTER="1"
+readonly PURITY="111"
+readonly RESOLUTION="1920x1080"
+readonly RATIOS="16x9"
+readonly SORTING="random"
+readonly COLORS="000000"
 
-# Конфигурация мониторов
-readonly MONITORS=("DP-3" "HDMI-A-1") # Массив мониторов для удобства масштабирования
+# Параметры системы
+readonly WALLPAPER_DIR="$HOME/Pictures/wallpapers/wallhaven"
+readonly MONITORS=("DP-3" "HDMI-A-1")
 
 # =============================================
 # Функции скрипта
 # =============================================
+
+# Функция для уведомлений
+send_dunst() {
+  local text=$1
+  local pic=$2
+  dunstify -i $pic -a "Обновлятор обоев" -t 3000 "$text"
+}
 
 # Функция для создания директории, если она не существует
 ensure_directory_exists() {
   local dir="$1"
   if [[ ! -d "$dir" ]]; then
     mkdir -p "$dir" || {
-      echo "Ошибка: не удалось создать директорию $dir" >&2
+      send_dunst "Ошибка: не удалось создать директорию $dir" >&2
       return 1
     }
   fi
@@ -58,14 +77,16 @@ download_random_wallpaper() {
   # Формируем параметры запроса
   local api_params=(
     "q=$encoded_query"
-    "categories=100"
-    "resolutions=$RESOLUTION"
-    "ratios=16x9"
-    "sorting=random"
-    "purity=100"
-    "apikey=$API_KEY"
-    "ai_art_filter=0"
-    "colors=000000"
+    "categories=$CATEGORIES"
+    "atleast=$RESOLUTION"
+    "ratios=$RATIOS"
+    "sorting=$SORTING"
+    "purity=$PURITY"
+    "ai_art_filter=$AI_ART_FILTER"
+    "colors=$COLORS"
+    "page=1"
+    "limit=2"
+    "apikey=$WALLHEVEN_API_KEY"
   )
 
   # Выполняем запрос к API
@@ -74,19 +95,19 @@ download_random_wallpaper() {
     IFS='&'
     echo "${api_params[*]}"
   )") || {
-    echo "Ошибка: не удалось выполнить запрос к API Wallhaven" >&2
+    send_dunst "Ошибка: не удалось выполнить запрос к API Wallhaven" >&2
     return 1
   }
 
   # Извлекаем URL обоев
   local wallpaper_url
   wallpaper_url=$(jq -r '.data[0].path' <<<"$response") || {
-    echo "Ошибка: не удалось разобрать ответ API" >&2
+    send_dunst "Ошибка: не удалось разобрать ответ API" >&2
     return 1
   }
 
   if [[ -z "$wallpaper_url" || "$wallpaper_url" == "null" ]]; then
-    echo "Ошибка: не удалось получить URL обоев. Попробуйте позже или смените тему." >&2
+    send_dunst "Ошибка: не удалось получить URL обоев. Попробуйте позже или смените тему." >&2
     return 1
   fi
 
@@ -96,7 +117,7 @@ download_random_wallpaper() {
   output_path="$output_dir/$filename"
 
   if ! wget -q "$wallpaper_url" -O "$output_path"; then
-    echo "Ошибка: не удалось скачать обои" >&2
+    send_dunst "Ошибка: не удалось скачать обои" >&2
     return 1
   fi
 
@@ -112,8 +133,6 @@ get_local_random_wallpaper() {
 # Функция для установки обоев на мониторы
 set_wallpapers() {
   local wallpapers=("$@")
-  hyprctl hyprpaper unload all
-
   for i in "${!wallpapers[@]}"; do
     local wallpaper="${wallpapers[$i]}"
     local monitor="${MONITORS[$i]}"
@@ -121,35 +140,51 @@ set_wallpapers() {
     if [[ -n "$wallpaper" && -n "$monitor" ]]; then
       hyprctl hyprpaper preload "$wallpaper"
       hyprctl hyprpaper wallpaper "$monitor,contain:$wallpaper"
-      echo "${monitor} -> $(basename "$wallpaper")"
+      send_dunst "${monitor} -> $(basename "$wallpaper")" "$wallpaper"
     fi
   done
+}
+set_wallpaper() {
+  local wallpaper=$1
+  local monitor=$2
+  hyprctl hyprpaper preload "$wallpaper"
+  hyprctl hyprpaper wallpaper "$monitor,contain:$wallpaper"
+  send_dunst "${monitor} -> $(basename "$wallpaper")" "$wallpaper"
 }
 
 # =============================================
 # Основная логика скрипта
 # =============================================
-
 main() {
-  # Проверяем и создаем директорию для обоев
+  send_dunst "Меняем обои!"
+  sleep 2
   ensure_directory_exists "$WALLPAPER_DIR" || exit 1
 
-  # Массив для хранения путей к обоям
   local wallpapers=()
+  hyprctl hyprpaper unload all
 
-  # Пытаемся скачать новые обои
+  # Массив для хранения PID фоновых процессов
+  local pids=()
+
   for ((i = 0; i < ${#MONITORS[@]}; i++)); do
-    local wallpaper
-    wallpaper=$(download_random_wallpaper "$WALLPAPER_DIR") || {
-      echo "Используем локальные обои для монитора ${MONITORS[$i]}" >&2
-      wallpaper=$(get_local_random_wallpaper "$WALLPAPER_DIR")
-    }
-    wallpapers+=("$wallpaper")
+    (
+      local monitor=${MONITORS[$i]}
+      send_dunst "Гружу обоину для ${monitor}..."
+
+      local wallpaper
+      wallpaper=$(download_random_wallpaper "$WALLPAPER_DIR") || {
+        send_dunst "Используем локальные обои для монитора ${monitor}" >&2
+        wallpaper=$(get_local_random_wallpaper "$WALLPAPER_DIR")
+      }
+
+      set_wallpaper "$wallpaper" "$monitor"
+    ) &        # Запускаем в фоне
+    pids+=($!) # Сохраняем PID процесса
   done
 
-  # Устанавливаем обои на мониторы
-  echo "Устанавливаем обои:"
-  set_wallpapers "${wallpapers[@]}"
+  # Ждём завершения всех фоновых процессов
+  wait "${pids[@]}"
+  send_dunst "Все обои загружены!"
 }
 
 main "$@"

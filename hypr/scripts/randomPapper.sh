@@ -42,7 +42,7 @@ readonly MONITORS=("DP-3" "HDMI-A-1")
 
 # Функция для создания директории, если она не существует
 ensure_directory_exists() {
-  local dir="$1"
+  local dir="$WALLPAPER_DIR"
   if [[ ! -d "$dir" ]]; then
     mkdir -p "$dir" || {
       send_dunst "Ошибка: не удалось создать директорию $dir" >&2
@@ -69,11 +69,11 @@ urlencode() {
   echo "$encoded"
 }
 
-# Функция для скачивания случайных обоев
-download_random_wallpaper() {
-  local output_dir="$1"
+# Функция для получения случайных обоев
+get_random_wallpapers_list() {
+  send_dunst "Запрашиваю список обоев с Wallhaven.cc"
   local encoded_query
-  encoded_query=$(urlencode "$QUERY") || return 1
+  encoded_query=$(urlencode "$QUERY")
 
   # Формируем параметры запроса
   local api_params=(
@@ -86,7 +86,6 @@ download_random_wallpaper() {
     "ai_art_filter=$AI_ART_FILTER"
     "colors=$COLORS"
     "page=1"
-    "limit=2"
     "apikey=$WALLHEVEN_API_KEY"
   )
 
@@ -100,17 +99,17 @@ download_random_wallpaper() {
     return 1
   }
 
-  # Извлекаем URL обоев
-  local wallpaper_url
-  wallpaper_url=$(jq -r '.data[0].path' <<<"$response") || {
+  local wallpapers_urls=$(jq -r '.data[].path' <<<"$response") || {
     send_dunst "Ошибка: не удалось разобрать ответ API" >&2
     return 1
   }
+  echo $wallpapers_urls
+}
 
-  if [[ -z "$wallpaper_url" || "$wallpaper_url" == "null" ]]; then
-    send_dunst "Ошибка: не удалось получить URL обоев. Попробуйте позже или смените тему." >&2
-    return 1
-  fi
+# Функция для скачивания случайных обоев
+download_random_wallpaper() {
+  local output_dir="$WALLPAPER_DIR"
+  local wallpaper_url="$1"
 
   # Скачиваем обои
   local filename output_path
@@ -127,8 +126,7 @@ download_random_wallpaper() {
 
 # Функция для получения случайного файла из локальной директории
 get_local_random_wallpaper() {
-  local dir="$1"
-  find "$dir" -type f -print0 | shuf -zn1 | tr -d '\0'
+  find "$WALLPAPER_DIR" -type f -print0 | shuf -zn1 | tr -d '\0'
 }
 
 # Функция для установки обоев на мониторы
@@ -159,33 +157,32 @@ set_wallpaper() {
 main() {
   send_dunst "Меняем обои!"
   sleep 2
-  ensure_directory_exists "$WALLPAPER_DIR" || exit 1
-
-  local wallpapers=()
+  ensure_directory_exists || exit 1
+  local wallpapers=($(get_random_wallpapers_list))
   hyprctl hyprpaper unload all
 
   # Массив для хранения PID фоновых процессов
   local pids=()
-
   for ((i = 0; i < ${#MONITORS[@]}; i++)); do
     (
       local monitor=${MONITORS[$i]}
-      send_dunst "Гружу обоину для ${monitor}..."
-
+      local wallpaper_url="${wallpapers[$i]}"
       local wallpaper
-      wallpaper=$(download_random_wallpaper "$WALLPAPER_DIR") || {
-        send_dunst "Используем локальные обои для монитора ${monitor}" >&2
-        wallpaper=$(get_local_random_wallpaper "$WALLPAPER_DIR")
-      }
-
+      if [[ -z "$wallpaper_url" ]]; then
+        send_dunst "Ошибка: Обоина не подгрузилась. Использую локальную обоину для ${monitor}." >&2
+        wallpaper=$(get_local_random_wallpaper)
+      else
+        send_dunst "Гружу обоину для ${monitor}..."
+        wallpaper=$(download_random_wallpaper $wallpaper_url || get_local_random_wallpaper)
+      fi
       set_wallpaper "$wallpaper" "$monitor"
-    ) &        # Запускаем в фоне
-    pids+=($!) # Сохраняем PID процесса
+    ) &
+    pids+=($!)
   done
 
   # Ждём завершения всех фоновых процессов
   wait "${pids[@]}"
-  send_dunst "Все обои загружены!"
+  send_dunst "Все обои установлены!"
 }
 
-# main "$@"
+main "$@"

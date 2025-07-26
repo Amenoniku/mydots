@@ -1,0 +1,151 @@
+@import "./colors.css";
+
+/* Базовые стили */
+* {
+  font-family: FantasqueSansMono Nerd Font;
+  font-size: 13px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+  margin: 5px;
+}
+
+/* Workspaces */
+#workspaces {
+  background-color: @surface0;
+  border-radius: 1rem;
+  margin: 5px 0 5px 1rem;
+}
+
+#workspaces button {
+  color: @lavender;
+  border-radius: 1rem;
+  padding: 0 1rem;
+  padding-left: 0.6rem;
+}
+
+#workspaces button.active {
+  color: @sky;
+}
+
+#workspaces button:hover {
+  color: @sapphire;
+}
+
+/* Общий стиль для модулей */
+
+#custom-spotify {
+  color: #1ed662;
+  border-radius: 1rem 0 0 1rem;
+  margin-left: 1rem;
+}
+
+#custom-gpu-usage,
+#custom-spotify,
+#cpu,
+#bluetooth,
+#mpd,
+#custom-weather,
+#temperature,
+#memory,
+#sway-mode,
+#backlight,
+#pulseaudio,
+#custom-vpn,
+#disk,
+#custom-recorder,
+#custom-audiorec,
+#battery,
+#clock,
+#network,
+#custom-power,
+#custom-spotify,
+#custom-music,
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#custom-lock,
+#custom-power {
+  background-color: @surface0;
+  padding: 0.3rem 0.6rem;
+  margin: 5px 0;
+}
+
+/* Индивидуальные модули */
+#clock {
+  color: @blue;
+  border-radius: 0 1rem 1rem 0;
+  margin-right: 1rem;
+}
+
+#battery {
+  color: @green;
+  border-radius: 0;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+  border-radius: 0;
+}
+
+#pulseaudio {
+  color: @maroon;
+  border-radius: 1rem 0 0 1rem;
+  margin-left: 1rem;
+}
+
+#custom-music {
+  color: @mauve;
+  border-radius: 1rem;
+}
+
+#custom-lock {
+  color: @lavender;
+  border-radius: 1rem 0 0 1rem;
+}
+
+#custom-power {
+  color: @red;
+  border-radius: 0 1rem 1rem 0;
+  margin-right: 1rem;
+}
+
+#custom-weather {
+  border-radius: 1rem;
+}
+
+#tray {
+  border-radius: 1rem;
+  margin-left: 1rem;
+}
+
+#temperature.cpu {
+  padding-left: 0;
+  color: @pink;
+}
+
+#temperature.gpu {
+  padding-left: 0;
+  color: @green;
+}
+
+#temperature.critical {
+  color: @critical;
+}
+
+#custom-logo {
+  color: #168fcb;
+}

@@ -6,3 +6,6 @@ feh \
 --edit \
 --fullscreen \
 --scale-down \
+--draw-actions \
+--action7 ";[Set wall DP-3] ~/.config/feh/setWallpaper.sh %F DP-3" \
+--action8 ";[Set wall HDMI-A-1] ~/.config/feh/setWallpaper.sh %F HDMI-A-1" \

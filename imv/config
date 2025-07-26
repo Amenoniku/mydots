@@ -1,0 +1,12 @@
+[options]
+fullscreen = true
+thumbs = true
+overlay = true
+; hide_cursor = true
+background = 000000
+scale_up = false
+
+; [input]
+; q = quit
+; h = prev
+; l = next

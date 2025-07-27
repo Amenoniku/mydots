@@ -79,7 +79,7 @@
 /* Индивидуальные модули */
 #clock {
   color: @blue;
-  border-radius: 0 1rem 1rem 0;
+  border-radius: 1rem;
   margin-right: 1rem;
 }
 
@@ -110,6 +110,20 @@
 #custom-music {
   color: @mauve;
   border-radius: 1rem;
+}
+
+#idle_inhibitor {
+  background: @panel-bg;
+  padding: 0 10px;
+}
+
+#idle_inhibitor.activated {
+  color: @yellow;
+}
+
+#custom-gpu-usage {
+  padding: 0 10px;
+  color: @green;
 }
 
 #custom-lock {
@@ -148,4 +162,28 @@
 
 #custom-logo {
   color: #168fcb;
+}
+
+#temperature.cpu {
+  padding-left: 0;
+  color: @pink;
+}
+
+#temperature.gpu {
+  padding-left: 0;
+  color: @green;
+}
+
+#temperature.critical {
+  color: @critical;
+}
+
+#cpu {
+  color: @pink;
+  padding: 0 10px;
+}
+
+#memory {
+  color: @teal;
+  padding: 0 10px;
 }

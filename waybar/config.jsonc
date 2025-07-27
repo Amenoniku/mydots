@@ -7,13 +7,7 @@
     "height": 25,
     "modules-left": ["custom/logo"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": [
-      "hyprland/language",
-      "custom/spotify",
-      "clock",
-      "custom/weather",
-      "tray"
-    ],
+    "modules-right": ["hyprland/language", "clock", "custom/weather", "tray"],
     "hyprland/language": {
       "format": "{}",
       "format-en": " 🇺🇸 ",

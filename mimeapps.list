@@ -25,6 +25,7 @@ application/pdf=libreoffice-draw.desktop;
 x-scheme-handler/tonsite=org.telegram.desktop.desktop;
 text/plain=code.desktop;
 application/x-fictionbook+xml=calibre-gui.desktop;
+audio/mpeg=org.gnome.Decibels.desktop;
 
 [Default Applications]
 x-scheme-handler/http=firefox.desktop
@@ -114,3 +115,4 @@ clash-verge=clash-verge-handler.desktop
 x-scheme-handler/clash=clash-verge.desktop
 application/x-fictionbook+xml=calibre-gui.desktop
 x-scheme-handler/betterdiscord=discord.desktop
+audio/mpeg=org.gnome.Decibels.desktop

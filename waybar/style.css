@@ -1,3 +1,4 @@
 @import "./themes/macchiato/index.css";
 
 @import url("./styles/weather.css");
+@import url("./styles/ollama.css");
